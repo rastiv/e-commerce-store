@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
-import { routeConfig } from "../routerConfig";
 import { Suspense } from "react";
+import { Route, Routes } from "react-router";
+import { routeConfig } from "../routerConfig";
 
 export const AppRouter = () => {
   return (
@@ -9,12 +9,11 @@ export const AppRouter = () => {
         <Route
           key={path}
           path={path}
-          element={element}
-          //   element={
-          //     <Suspense key={path} fallback={<>loading...</>}>
-          //       {element}
-          //     </Suspense>
-          //   }
+          element={
+            <Suspense key={path} fallback={<>LOADING...</>}>
+              {element}
+            </Suspense>
+          }
         />
       ))}
     </Routes>
