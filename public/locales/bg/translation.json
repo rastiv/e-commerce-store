@@ -4,5 +4,30 @@
     "login": "Вход",
     "searchBy": "Търси",
     "address": "1000 София"
+  },
+  "footer": {
+    "about": "За нас",
+    "aboutUs": "За нас",
+    "ourBranches": "Нашите клонове",
+    "changelog": "История на изменения",
+    "quickLinks": "Бързи връзки",
+    "faqs": "Често задавани въпроси",
+    "recipes": "Рецепти",
+    "contactUs": "Свържете се с нас",
+    "helpSupport": "Помощ и поддръжка",
+    "termsOfService": "Условия за ползване",
+    "privacyPolicy": "Политика за конфиденциалност",
+    "security": "Сигурност",
+    "company": "Компания",
+    "blog": "Блог",
+    "contact": "Контакт",
+    "social": "Социални мрежи",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "twitter": "Twitter",
+    "copyright": "Всички права запазени © {{year}} {{company}}"
+  },
+  "pageLoader": {
+    "loading": "Зареждане..."
   }
 }

@@ -1,17 +1,17 @@
-import { Link } from "react-router";
-import { useTranslation } from "react-i18next";
-import styles from "./HomePage.module.scss";
 import { Header } from "@/widgets/Header";
+import { Footer } from "@/widgets/Footer";
+import styles from "./HomePage.module.scss";
+import { Spinner } from "@/shares/ui";
 
 const HomePage = () => {
-  const { t } = useTranslation();
-
   return (
-    <>
+    <div className={styles.pageWrapper}>
       <Header />
-      <h1 className={styles.title}>Home Page / {t("hello")}</h1>
-      <Link to={"/login"}>Login Page</Link>
-    </>
+      <main className={styles.content}>
+        <Spinner />
+      </main>
+      <Footer />
+    </div>
   );
 };
 
