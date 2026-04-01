@@ -1,3 +1,8 @@
 {
-  "hello": "Hello"
+  "header": {
+    "cart": "Cart",
+    "login": "Login",
+    "searchBy": "Search by",
+    "address": "1000 Sofia"
+  }
 }
