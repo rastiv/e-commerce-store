@@ -1,0 +1,32 @@
+import { useTranslation } from "react-i18next";
+import PageErrorIcon from "@/shares/assets/icons/PageError.svg?react";
+import { Button } from "@/shares/ui";
+import styles from "./PageError.module.scss";
+
+const PageError = () => {
+  const { t } = useTranslation();
+
+  const handleReloadClick = () => {
+    window.location.reload();
+  };
+
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.content}>
+        <PageErrorIcon className={styles.icon} />
+        <h3 className={styles.title}>{t("pageError.title")}</h3>
+        <p className={styles.description}>{t("pageError.description")}</p>
+        <Button
+          theme="primary"
+          form="rounded"
+          className={styles.button}
+          onClick={handleReloadClick}
+        >
+          {t("pageError.reload")}
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default PageError;

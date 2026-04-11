@@ -1,0 +1,40 @@
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  max-width: 450px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.icon {
+  fill: var(--primary-color);
+}
+
+.title {
+  color: var(--primary-color);
+  font: var(--font-lg);
+  font-weight: 700;
+  margin-top: 32px;
+}
+
+.description {
+  color: var(--gray-700);
+  font: var(--font-base);
+  font-weight: 600;
+  margin: 16px 0 32px;
+}
+
+.button {
+  width: 100%;
+}

@@ -1,11 +1,13 @@
 import { Suspense } from "react";
-import { AppRouter } from "./providers";
+import { AppRouter, ErrorBoundary } from "./providers";
 
 function App() {
   return (
-    <Suspense fallback={<></>}>
-      <AppRouter />
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<></>}>
+        <AppRouter />
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 
