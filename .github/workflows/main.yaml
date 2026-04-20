@@ -21,19 +21,19 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        uses: npm ci
+        run: npm ci
 
       - name: Typescript
-        uses: npm run lint:ts
+        run: npm run lint:ts
 
       - name: Eslint
-        uses: npm run lint
+        run: npm run lint
 
       - name: Stylelint
-        uses: npm run lint:scss
+        run: npm run lint:scss
 
       - name: Unit tests
-        uses: npm run test:unit
+        run: npm run test:unit
 
       - name: Regression tests
         uses: chromaui/action@latest
@@ -41,4 +41,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
       - name: Build
-        uses: npm run build
+        run: npm run build
