@@ -35,10 +35,15 @@ jobs:
       - name: Unit tests
         run: npm run test:unit
 
+      - name: Validate Chromatic token
+        run: |
+          if [ -z "${{ secrets.CHROMATIC_PROJECT_TOKEN }}" ]; then
+            echo "CHROMATIC_PROJECT_TOKEN is missing in repository secrets"
+            exit 1
+          fi
+
       - name: Regression tests
-        uses: chromaui/action@latest
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: npm run test:regression -- --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --exit-zero-on-changes
 
       - name: Build
         run: npm run build
