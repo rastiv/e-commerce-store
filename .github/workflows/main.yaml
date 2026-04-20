@@ -26,10 +26,10 @@ jobs:
       - name: Typescript
         run: npm run lint:ts
 
-      - name: Eslint
+      - name: ESlint
         run: npm run lint
 
-      - name: Stylelint
+      - name: SCSS lint
         run: npm run lint:scss
 
       - name: Unit tests
