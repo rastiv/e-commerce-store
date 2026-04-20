@@ -43,7 +43,17 @@ jobs:
           fi
 
       - name: Regression tests
-        run: npm run test:regression -- --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --exit-zero-on-changes
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          CI: true
+        run: |
+          TOKEN="$(printf '%s' "$CHROMATIC_PROJECT_TOKEN" | tr -d '\r\n')"
+          if [ -z "$TOKEN" ]; then
+            echo "CHROMATIC_PROJECT_TOKEN is empty after trimming"
+            exit 1
+          fi
+
+          npm run test:regression -- --project-token="$TOKEN" --exit-zero-on-changes --ci --debug
 
       - name: Build
         run: npm run build
