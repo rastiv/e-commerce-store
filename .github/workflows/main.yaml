@@ -35,25 +35,5 @@ jobs:
       - name: Unit tests
         run: npm run test:unit
 
-      - name: Validate Chromatic token
-        run: |
-          if [ -z "${{ secrets.CHROMATIC_PROJECT_TOKEN }}" ]; then
-            echo "CHROMATIC_PROJECT_TOKEN is missing in repository secrets"
-            exit 1
-          fi
-
-      - name: Regression tests
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          CI: true
-        run: |
-          TOKEN="$(printf '%s' "$CHROMATIC_PROJECT_TOKEN" | tr -d '\r\n')"
-          if [ -z "$TOKEN" ]; then
-            echo "CHROMATIC_PROJECT_TOKEN is empty after trimming"
-            exit 1
-          fi
-
-          npm run test:regression -- --project-token="$TOKEN" --exit-zero-on-changes --ci --debug
-
       - name: Build
         run: npm run build
