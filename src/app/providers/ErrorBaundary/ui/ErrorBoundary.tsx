@@ -1,5 +1,6 @@
 import { Component, useCallback, useState } from "react";
 import type { ErrorInfo, ReactNode } from "react";
+
 import { PageError } from "@/widgets/PageError";
 
 type ErrorBoundaryProps = {

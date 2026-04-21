@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import { AppRouter, ErrorBoundary } from "./providers";
 
 function App() {

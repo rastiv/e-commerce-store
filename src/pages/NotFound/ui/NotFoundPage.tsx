@@ -1,9 +1,12 @@
-import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/shares/ui";
-import { routePaths } from "@/shares/config";
-import NotFoundIcon from "@/shares/assets/icons/NotFound.svg?react";
+import { useNavigate } from "react-router";
+
 import styles from "./NotFoundPage.module.scss";
+
+import NotFoundIcon from "@/shares/assets/icons/NotFound.svg?react";
+import { routePaths } from "@/shares/config";
+import { Button } from "@/shares/ui";
+
 
 const NotFoundPage = () => {
   const { t } = useTranslation();

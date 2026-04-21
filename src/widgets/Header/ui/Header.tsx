@@ -1,17 +1,17 @@
-import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+
+import styles from "./Header.module.scss";
+import LanguageSwitcher from "./LanguageSwitcher/LanguageSwitcher";
+import ThemeSwitcher from "./ThemeSwitcher/ThemeSwitcher";
 
 import LogoIcon from "@/shares/assets/icons/Logo.svg?react";
 import MapPin from "@/shares/assets/icons/MapPin.svg?react";
 import SearchIcon from "@/shares/assets/icons/Search.svg?react";
 import UsersIcon from "@/shares/assets/icons/Users.svg?react";
-import { Button, Input, AppIcon } from "@/shares/ui";
 import { routePaths } from "@/shares/config";
+import { Button, Input, AppIcon } from "@/shares/ui";
 
-import LanguageSwitcher from "./LanguageSwitcher/LanguageSwitcher";
-import ThemeSwitcher from "./ThemeSwitcher/ThemeSwitcher";
-
-import styles from "./Header.module.scss";
 
 const Header = () => {
   const { t } = useTranslation();
