@@ -1,5 +1,6 @@
-import { ErrorBoundary } from "./ErrorBaundary/ui/ErrorBoundary";
-import { AppRouter } from "./router/ui/AppRouter";
-import { ThemeProvider } from "./theme/ThemeProvider";
+import { AppRouter } from "./AppRouter";
+import { ErrorBoundary } from "./ErrorBaundary";
+import { StoreProvider } from "./StoreProvider";
+import { ThemeProvider } from "./ThemeProvider";
 
-export { AppRouter, ThemeProvider, ErrorBoundary };
+export { AppRouter, ThemeProvider, ErrorBoundary, StoreProvider };

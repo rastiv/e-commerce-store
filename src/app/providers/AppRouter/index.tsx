@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router";
 
 import { PageLoader } from "@/widgets/PageLoader";
 
-import { routeConfig } from "../routerConfig";
+import { routeConfig } from "./routerConfig";
 
 export const AppRouter = () => {
   return (
