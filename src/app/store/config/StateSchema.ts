@@ -1,3 +1,5 @@
+import type { UserShema } from "@/entities/user";
+
 export interface StateSchema {
-  // add your state slices here
+  user: UserShema;
 }
