@@ -15,7 +15,7 @@
     "test:regression": "npx chromatic",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic "
+    "chromatic": "npx chromatic"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
