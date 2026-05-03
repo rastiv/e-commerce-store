@@ -66,6 +66,7 @@ const TabTrigger = ({ value, children }: TabTriggerProps) => {
       theme={isActive ? "outline" : "tertiary"}
       form="rounded"
       onClick={handleClick}
+      type="button"
       className={cn(styles.trigger, { [styles.active]: isActive })}
     >
       {children}

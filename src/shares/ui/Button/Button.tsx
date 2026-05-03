@@ -15,6 +15,7 @@ type ButtonProps = {
   form?: ButtonForm;
   theme?: ButtonTheme;
   disabled?: boolean;
+  fullWidth?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
@@ -24,6 +25,7 @@ const Button = ({
   form = "pill",
   theme = "primary",
   disabled = false,
+  fullWidth = false,
   ...rest
 }: ButtonProps) => {
   return (
@@ -38,6 +40,7 @@ const Button = ({
         styles[theme],
         {
           [styles.disabled]: disabled,
+          [styles.fullWidth]: fullWidth,
         },
       )}
     >

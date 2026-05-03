@@ -69,14 +69,10 @@ const Input = ({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        className={cn(
-          styles.input,
-          {
-            [styles.rounded]: rounded,
-            [styles.disabled]: disabled,
-          },
-          className,
-        )}
+        className={cn(styles.input, {
+          [styles.rounded]: rounded,
+          [styles.disabled]: disabled,
+        })}
       />
 
       {type === "password" && (
