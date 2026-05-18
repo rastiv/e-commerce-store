@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
-import "@/shares/config/i18n/i18n";
+import "@/app/i18n/config";
 
 import App from "./app/App.tsx";
 import { StoreProvider, ThemeProvider } from "./app/providers";

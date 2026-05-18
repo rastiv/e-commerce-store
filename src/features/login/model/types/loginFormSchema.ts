@@ -1,4 +1,4 @@
-import type { AuthMethodType } from "@/shares/config";
+import type { AuthMethodType } from "@/shared/config";
 
 export type LoginFormSchema = {
   email?: string;

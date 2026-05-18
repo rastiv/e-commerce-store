@@ -1,14 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
+import LogoIcon from "@/shared/assets/icons/Logo.svg?react";
+import { routePaths } from "@/shared/config";
+
 import styles from "./Footer.module.scss";
 
-import LogoIcon from "@/shares/assets/icons/Logo.svg?react";
-import { routePaths } from "@/shares/config";
-
-
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("footer");
 
   return (
     <footer className={styles.footer}>
@@ -17,100 +16,100 @@ const Footer = () => {
 
         <div className={styles.links}>
           <div className={styles.column}>
-            <h3 className={styles.columnTitle}>{t("footer.about")}</h3>
+            <h3 className={styles.columnTitle}>{t("about")}</h3>
             <ul className={styles.linkList}>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.aboutUs")}
+                  {t("aboutUs")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.ourBranches")}
+                  {t("ourBranches")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.changelog")}
+                  {t("changelog")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div className={styles.column}>
-            <h3 className={styles.columnTitle}>{t("footer.quickLinks")}</h3>
+            <h3 className={styles.columnTitle}>{t("quickLinks")}</h3>
             <ul className={styles.linkList}>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.faqs")}
+                  {t("faqs")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.recipes")}
+                  {t("recipes")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.contactUs")}
+                  {t("contactUs")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div className={styles.column}>
-            <h3 className={styles.columnTitle}>{t("footer.helpSupport")}</h3>
+            <h3 className={styles.columnTitle}>{t("helpSupport")}</h3>
             <ul className={styles.linkList}>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.termsOfService")}
+                  {t("termsOfService")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.privacyPolicy")}
+                  {t("privacyPolicy")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.security")}
+                  {t("security")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div className={styles.column}>
-            <h3 className={styles.columnTitle}>{t("footer.company")}</h3>
+            <h3 className={styles.columnTitle}>{t("company")}</h3>
             <ul className={styles.linkList}>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.blog")}
+                  {t("blog")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.contact")}
+                  {t("contact")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div className={styles.column}>
-            <h3 className={styles.columnTitle}>{t("footer.social")}</h3>
+            <h3 className={styles.columnTitle}>{t("social")}</h3>
             <ul className={styles.linkList}>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.facebook")}
+                  {t("facebook")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.instagram")}
+                  {t("instagram")}
                 </Link>
               </li>
               <li>
                 <Link className={styles.link} to={routePaths.home}>
-                  {t("footer.twitter")}
+                  {t("twitter")}
                 </Link>
               </li>
             </ul>
@@ -118,7 +117,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.copyright}>
-        {t("footer.copyright", { year: "2026", company: "Ra.St.Iv" })}
+        {t("copyright", { year: "2026", company: "Ra.St.Iv" })}
       </div>
     </footer>
   );

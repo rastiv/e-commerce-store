@@ -1,9 +1,9 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+import { AuthMethod, type AuthMethodType } from "@/shared/config";
+
 import { login } from "../services/login";
 import type { LoginFormSchema } from "../types/loginFormSchema";
-
-import { AuthMethod, type AuthMethodType } from "@/shares/config";
 
 const initialState: LoginFormSchema = {
   email: "",

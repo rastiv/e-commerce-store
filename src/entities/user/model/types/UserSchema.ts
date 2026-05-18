@@ -1,4 +1,4 @@
-import type { AuthProviderType } from "@/shares/config";
+import type { AuthProviderType } from "@/shared/config";
 
 export type User = {
   id: string;

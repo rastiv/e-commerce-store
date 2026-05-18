@@ -24,3 +24,9 @@
   display: block;
   margin-bottom: 8px;
 }
+
+.error {
+  color: var(--red-500);
+  font: var(--font-sm);
+  font-weight: 600;
+}

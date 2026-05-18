@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 
-import styles from "./PageError.module.scss";
+import PageErrorIcon from "@/shared/assets/icons/PageError.svg?react";
+import { Button } from "@/shared/ui";
 
-import PageErrorIcon from "@/shares/assets/icons/PageError.svg?react";
-import { Button } from "@/shares/ui";
+import styles from "./PageError.module.scss";
 
 const PageError = () => {
   const { t } = useTranslation();
@@ -16,15 +16,15 @@ const PageError = () => {
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <PageErrorIcon className={styles.icon} />
-        <h3 className={styles.title}>{t("pageError.title")}</h3>
-        <p className={styles.description}>{t("pageError.description")}</p>
+        <h3 className={styles.title}>{t("errorTitle")}</h3>
+        <p className={styles.description}>{t("errorDescription")}</p>
         <Button
           theme="primary"
           form="rounded"
           className={styles.button}
           onClick={handleReloadClick}
         >
-          {t("pageError.reload")}
+          {t("reload")}
         </Button>
       </div>
     </div>

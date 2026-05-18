@@ -1,0 +1,15 @@
+{
+  "loading": "Loading...",
+  "goBack": "Go Back",
+  "goNext": "Go Next",
+  "tryAgain": "Try again",
+  "404Title": "404 - Page Not Found",
+  "404Description": "Sorry - the page you are looking for does not exist. Please check the URL or go back to the homepage.",
+  "errorTitle": "Something went wrong",
+  "errorDescription": "Sorry - an unexpected error occurred. Please try to reload the page or try out later.",
+  "companyAddress": "1000 Sofia",
+  "cart": "Cart",
+  "searchBy": "Search by",
+  "search": "Search",
+  "reload": "Reload"
+}

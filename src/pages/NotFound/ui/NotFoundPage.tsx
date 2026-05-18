@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
+import NotFoundIcon from "@/shared/assets/icons/NotFound.svg?react";
+import { routePaths } from "@/shared/config";
+import { Button } from "@/shared/ui";
+
 import styles from "./NotFoundPage.module.scss";
-
-import NotFoundIcon from "@/shares/assets/icons/NotFound.svg?react";
-import { routePaths } from "@/shares/config";
-import { Button } from "@/shares/ui";
-
 
 const NotFoundPage = () => {
   const { t } = useTranslation();
@@ -24,15 +23,15 @@ const NotFoundPage = () => {
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <NotFoundIcon className={styles.icon} />
-        <h3 className={styles.title}>{t("notFound.title")}</h3>
-        <p className={styles.description}>{t("notFound.description")}</p>
+        <h3 className={styles.title}>{t("404Title")}</h3>
+        <p className={styles.description}>{t("404Description")}</p>
         <Button
           theme="primary"
           form="rounded"
           className={styles.button}
           onClick={handleClickBack}
         >
-          {t("notFound.goBack")}
+          {t("goBack")}
         </Button>
       </div>
     </div>

@@ -4,7 +4,7 @@ import HomePage from "@/pages/home/ui/HomePage";
 import LoginPage from "@/pages/login/ui/LoginPage";
 import { NotFoundPage } from "@/pages/NotFound";
 
-import { AppRouter, routePaths } from "@/shares/config";
+import { AppRouter, routePaths } from "@/shared/config";
 
 export const routeConfig: RouteProps[] = [
   {

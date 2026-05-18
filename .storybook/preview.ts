@@ -5,7 +5,7 @@ import {
   ThemeDecorator,
   RouterDecorator,
   LanguageDecorator,
-} from "../src/shares/config/storybook";
+} from "../src/shared/config/storybook";
 
 const preview: Preview = {
   globalTypes: {

@@ -1,15 +1,15 @@
 import { useTranslation } from "react-i18next";
 
-import styles from "./PageLoader.module.scss";
+import { Spinner } from "@/shared/ui";
 
-import { Spinner } from "@/shares/ui";
+import styles from "./PageLoader.module.scss";
 
 const PageLoader = () => {
   const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
-      <h3 className={styles.title}>{t("pageLoader.loading")}</h3>
-      <Spinner />
+      <h3 className={styles.title}>{t("loading")}</h3>
+      <Spinner size="lg" />
     </div>
   );
 };

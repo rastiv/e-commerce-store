@@ -1,8 +1,17 @@
 import type { SubmitEvent } from "react";
 import { useNavigate } from "react-router";
 
+import ArrowRight from "@/shared/assets/icons/ArrowRight.svg?react";
+import MailIcon from "@/shared/assets/icons/Mail.svg?react";
+import PhoneIcon from "@/shared/assets/icons/Phone.svg?react";
+import { AuthMethod, routePaths, type AuthMethodType } from "@/shared/config";
+import { useAppDispatch, useAppSelector } from "@/shared/libs";
+import { AppIcon, Button, Input, Tabs } from "@/shared/ui";
+
 import {
   selectLoginEmail,
+  selectLoginError,
+  selectLoginIsLoading,
   selectLoginMethod,
   selectLoginPassword,
   selectLoginPhone,
@@ -12,13 +21,6 @@ import { loginActions } from "../../model/slice/loginSlice";
 
 import styles from "./LoginForm.module.scss";
 
-import ArrowRight from "@/shares/assets/icons/ArrowRight.svg?react";
-import MailIcon from "@/shares/assets/icons/Mail.svg?react";
-import PhoneIcon from "@/shares/assets/icons/Phone.svg?react";
-import { AuthMethod, routePaths, type AuthMethodType } from "@/shares/config";
-import { useAppDispatch, useAppSelector } from "@/shares/libs";
-import { AppIcon, Button, Input, Tabs } from "@/shares/ui";
-
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -27,6 +29,8 @@ export const LoginForm = () => {
   const phone = useAppSelector(selectLoginPhone);
   const password = useAppSelector(selectLoginPassword);
   const method = useAppSelector(selectLoginMethod);
+  const isLoading = useAppSelector(selectLoginIsLoading);
+  const error = useAppSelector(selectLoginError);
 
   const handleChangeEmail = (value: string) => {
     dispatch(loginActions.setEmail(value));
@@ -67,8 +71,9 @@ export const LoginForm = () => {
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value={AuthMethod.EMAIL}>
-          <label className={styles.label}>Email</label>
           <Input
+            label="Email"
+            error={!!error}
             value={email}
             type="email"
             className={styles.input}
@@ -77,8 +82,8 @@ export const LoginForm = () => {
           />
         </Tabs.Content>
         <Tabs.Content value={AuthMethod.PHONE}>
-          <label className={styles.label}>Phone</label>
           <Input
+            label="Phone"
             value={phone}
             className={styles.input}
             placeholder="Enter your phone"
@@ -86,15 +91,24 @@ export const LoginForm = () => {
           />
         </Tabs.Content>
       </Tabs>
-      <label className={styles.label}>Password</label>
       <Input
+        error={!!error}
         value={password}
         type="password"
         className={styles.input}
         placeholder="Enter your password"
         onChange={handleChangePassword}
+        label="Password"
       />
-      <Button type="submit" className={styles.button} size="md" fullWidth>
+      {error && <div className={styles.error}>{error}</div>}
+      <Button
+        isLoading={isLoading}
+        disabled={isLoading}
+        type="submit"
+        className={styles.button}
+        size="md"
+        fullWidth
+      >
         Login <AppIcon Icon={ArrowRight} />
       </Button>
     </form>

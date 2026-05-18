@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from "@/shares/config";
-import type { ThemeType } from "@/shares/config";
+import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from "@/shared/config";
+import type { ThemeType } from "@/shared/config";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
