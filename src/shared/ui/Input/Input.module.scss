@@ -6,16 +6,20 @@
 .inputContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-8);
   background: var(--white);
   border: 1px solid var(--gray-200);
   box-shadow: 0 2px 80px 0 rgb(0 0 0 / 4%);
   border-radius: 8px;
-  padding: 12px 16px;
-  transition: all 0.2s linear;
+  padding: var(--space-12) var(--space-16);
+  transition:
+    outline 0.2s linear,
+    border 0.2s linear;
+  outline: 3px solid transparent;
 
   &.focus {
-    border-color: var(--primary-color);
+    border-color: var(--primary-color-60);
+    outline: 3px solid var(--primary-color-30);
   }
 
   &.disabled {
@@ -24,7 +28,6 @@
 
   &.error {
     border-color: var(--red-500);
-    background-color: var(--red-50);
   }
 
   input[type="number"] {
@@ -39,19 +42,22 @@
 }
 
 .label {
+  display: block;
   font: var(--font-s);
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-4);
+}
 
-  &.error {
-    color: var(--red-500);
-  }
+.helperText {
+  color: var(--gray-400);
+  font: var(--font-sm);
+  margin-top: var(--space-3);
 }
 
 .errorText {
-  margin-top: 6px;
   color: var(--red-500);
-  font: var(--font-xs);
+  font: var(--font-sm);
+  margin-top: var(--space-3);
 }
 
 .rounded {
@@ -63,6 +69,7 @@
   border: none;
   outline: none;
   color: var(--gray-800);
+  background-color: transparent;
 
   &::placeholder {
     color: var(--gray-400);
@@ -75,10 +82,6 @@
     &::placeholder {
       color: var(--gray-400);
     }
-  }
-
-  &.error {
-    background-color: var(--red-50);
   }
 }
 

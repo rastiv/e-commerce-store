@@ -21,8 +21,9 @@ type InputProps = {
   onChange?: (value: string) => void;
   rounded?: boolean;
   disabled?: boolean;
-  error?: boolean;
+  error?: string;
   label?: string;
+  helperText?: string;
 } & HTMLInputType;
 
 const Input = ({
@@ -33,8 +34,9 @@ const Input = ({
   rounded = false,
   disabled = false,
   type = "text",
-  error = false,
+  error,
   label,
+  helperText,
   ...rest
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -57,18 +59,14 @@ const Input = ({
   };
 
   return (
-    <>
-      {label && (
-        <label className={cn(styles.label, { [styles.error]: error })}>
-          {label}
-        </label>
-      )}
+    <div>
+      {label && <label className={cn(styles.label)}>{label}</label>}
       <div
         className={cn(styles.inputContainer, className, {
           [styles.rounded]: rounded,
           [styles.disabled]: disabled,
           [styles.focus]: focus,
-          [styles.error]: error,
+          [styles.error]: !!error,
         })}
       >
         {icon}
@@ -83,7 +81,7 @@ const Input = ({
           className={cn(styles.input, {
             [styles.rounded]: rounded,
             [styles.disabled]: disabled,
-            [styles.error]: error,
+            [styles.error]: !!error,
           })}
         />
 
@@ -98,7 +96,14 @@ const Input = ({
           </Button>
         )}
       </div>
-    </>
+      {helperText && !error && (
+        <div className={styles.helperText}>{helperText}</div>
+      )}
+      {error && <div className={styles.errorText}>{error}</div>}
+      {!helperText && !error && (
+        <div className={styles.errorText}>{"\u00A0"}</div>
+      )}
+    </div>
   );
 };
 

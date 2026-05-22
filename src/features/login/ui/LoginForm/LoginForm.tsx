@@ -2,17 +2,14 @@ import type { SubmitEvent } from "react";
 import { useNavigate } from "react-router";
 
 import ArrowRight from "@/shared/assets/icons/ArrowRight.svg?react";
-import MailIcon from "@/shared/assets/icons/Mail.svg?react";
-import PhoneIcon from "@/shared/assets/icons/Phone.svg?react";
-import { AuthMethod, routePaths, type AuthMethodType } from "@/shared/config";
+import { routePaths } from "@/shared/config";
 import { useAppDispatch, useAppSelector } from "@/shared/libs";
-import { AppIcon, Button, Input, Tabs } from "@/shared/ui";
+import { AppIcon, Button, Input, useToast } from "@/shared/ui";
 
 import {
   selectLoginEmail,
   selectLoginError,
   selectLoginIsLoading,
-  selectLoginMethod,
   selectLoginPassword,
   selectLoginPhone,
 } from "../../model/selectors";
@@ -24,11 +21,11 @@ import styles from "./LoginForm.module.scss";
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { addToast } = useToast();
 
   const email = useAppSelector(selectLoginEmail);
   const phone = useAppSelector(selectLoginPhone);
   const password = useAppSelector(selectLoginPassword);
-  const method = useAppSelector(selectLoginMethod);
   const isLoading = useAppSelector(selectLoginIsLoading);
   const error = useAppSelector(selectLoginError);
 
@@ -36,17 +33,8 @@ export const LoginForm = () => {
     dispatch(loginActions.setEmail(value));
   };
 
-  const handleChangePhone = (value: string) => {
-    dispatch(loginActions.setPhone(value));
-  };
-
   const handleChangePassword = (value: string) => {
     dispatch(loginActions.setPassword(value));
-  };
-
-  const handleTabChange = (value: string) => {
-    dispatch(loginActions.setMethod(value as AuthMethodType));
-    dispatch(loginActions.resetForm());
   };
 
   const handleSumbit = async (e: SubmitEvent<HTMLFormElement>) => {
@@ -54,53 +42,32 @@ export const LoginForm = () => {
     const result = await dispatch(login({ email, phone, password }));
     if (login.fulfilled.match(result)) {
       navigate(routePaths.home);
+    } else {
+      addToast({
+        message: error || "Login failed",
+        status: "error",
+      });
     }
   };
 
   return (
     <form className={styles.form} onSubmit={handleSumbit}>
-      <Tabs defaultValue={method} onChange={handleTabChange}>
-        <Tabs.List>
-          <Tabs.Trigger value={AuthMethod.EMAIL}>
-            <AppIcon Icon={MailIcon} />
-            Email
-          </Tabs.Trigger>
-          <Tabs.Trigger value={AuthMethod.PHONE}>
-            <AppIcon Icon={PhoneIcon} />
-            Phone
-          </Tabs.Trigger>
-        </Tabs.List>
-        <Tabs.Content value={AuthMethod.EMAIL}>
-          <Input
-            label="Email"
-            error={!!error}
-            value={email}
-            type="email"
-            className={styles.input}
-            placeholder="Enter your email"
-            onChange={handleChangeEmail}
-          />
-        </Tabs.Content>
-        <Tabs.Content value={AuthMethod.PHONE}>
-          <Input
-            label="Phone"
-            value={phone}
-            className={styles.input}
-            placeholder="Enter your phone"
-            onChange={handleChangePhone}
-          />
-        </Tabs.Content>
-      </Tabs>
       <Input
-        error={!!error}
+        label="Email"
+        value={email}
+        type="email"
+        placeholder="Enter your email"
+        disabled={isLoading}
+        onChange={handleChangeEmail}
+      />
+      <Input
+        label="Password"
         value={password}
         type="password"
-        className={styles.input}
         placeholder="Enter your password"
+        disabled={isLoading}
         onChange={handleChangePassword}
-        label="Password"
       />
-      {error && <div className={styles.error}>{error}</div>}
       <Button
         isLoading={isLoading}
         disabled={isLoading}

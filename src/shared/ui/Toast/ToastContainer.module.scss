@@ -1,0 +1,26 @@
+.container {
+  position: fixed;
+  z-index: var(--toast-z-index);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  pointer-events: none;
+}
+
+/* ── Horizontal alignment ──────────────────────────────── */
+
+.topLeft,
+.bottomLeft {
+  left: var(--space-8);
+}
+
+.topCenter,
+.bottomCenter {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.topRight,
+.bottomRight {
+  right: var(--space-8);
+}
