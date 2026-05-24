@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { useState, forwardRef } from "react";
 import type { ChangeEvent } from "react";
 
-import HideIcon from "@/shared/assets/icons/Hide.svg?react";
-import ShowIcon from "@/shared/assets/icons/Show.svg?react";
 import { cn } from "@/shared/libs";
 
 import Button from "../Button/Button";
@@ -18,7 +17,7 @@ type InputProps = {
   className?: string;
   value?: string;
   icon?: React.ReactNode;
-  onChange?: (value: string) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   rounded?: boolean;
   disabled?: boolean;
   error?: string;
@@ -26,85 +25,90 @@ type InputProps = {
   helperText?: string;
 } & HTMLInputType;
 
-const Input = ({
-  className,
-  value,
-  icon,
-  onChange,
-  rounded = false,
-  disabled = false,
-  type = "text",
-  error,
-  label,
-  helperText,
-  ...rest
-}: InputProps) => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [focus, setFocus] = useState<boolean>(false);
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className,
+      value,
+      icon,
+      onChange,
+      rounded = false,
+      disabled = false,
+      type = "text",
+      error,
+      label,
+      helperText,
+      ...rest
+    }: InputProps,
+    ref,
+  ) => {
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [focus, setFocus] = useState<boolean>(false);
 
-  const toggleShowPassword = () => {
-    setShowPassword((prev) => !prev);
-  };
+    const toggleShowPassword = () => {
+      setShowPassword((prev) => !prev);
+    };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
-  };
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e);
+    };
 
-  const handleFocus = () => {
-    setFocus(true);
-  };
+    const handleFocus = () => {
+      setFocus(true);
+    };
 
-  const handleBlur = () => {
-    setFocus(false);
-  };
+    const handleBlur = () => {
+      setFocus(false);
+    };
 
-  return (
-    <div>
-      {label && <label className={cn(styles.label)}>{label}</label>}
-      <div
-        className={cn(styles.inputContainer, className, {
-          [styles.rounded]: rounded,
-          [styles.disabled]: disabled,
-          [styles.focus]: focus,
-          [styles.error]: !!error,
-        })}
-      >
-        {icon}
-        <input
-          {...rest}
-          value={value}
-          disabled={disabled}
-          type={showPassword && type === "password" ? "text" : type}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          className={cn(styles.input, {
+    return (
+      <div>
+        {label && <label className={cn(styles.label)}>{label}</label>}
+        <div
+          className={cn(styles.inputContainer, className, {
             [styles.rounded]: rounded,
             [styles.disabled]: disabled,
+            [styles.focus]: focus,
             [styles.error]: !!error,
           })}
-        />
+        >
+          {icon}
+          <input
+            {...rest}
+            ref={ref as React.Ref<HTMLInputElement>}
+            value={value}
+            disabled={disabled}
+            type={showPassword && type === "password" ? "text" : type}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            className={cn(styles.input, {
+              [styles.rounded]: rounded,
+              [styles.disabled]: disabled,
+              [styles.error]: !!error,
+            })}
+          />
 
-        {type === "password" && (
-          <Button
-            theme="ghost"
-            type="button"
-            className={styles.toggleVisibility}
-            onClick={toggleShowPassword}
-          >
-            {showPassword ? <HideIcon /> : <ShowIcon />}
-          </Button>
+          {type === "password" && (
+            <Button theme="ghost" type="button" onClick={toggleShowPassword}>
+              {showPassword ? (
+                <EyeOff className={styles.icon} />
+              ) : (
+                <Eye className={styles.icon} />
+              )}
+            </Button>
+          )}
+        </div>
+        {helperText && !error && (
+          <div className={styles.helperText}>{helperText}</div>
+        )}
+        {error && <div className={styles.errorText}>{error}</div>}
+        {!helperText && !error && (
+          <div className={styles.errorText}>{"\u00A0"}</div>
         )}
       </div>
-      {helperText && !error && (
-        <div className={styles.helperText}>{helperText}</div>
-      )}
-      {error && <div className={styles.errorText}>{error}</div>}
-      {!helperText && !error && (
-        <div className={styles.errorText}>{"\u00A0"}</div>
-      )}
-    </div>
-  );
-};
+    );
+  },
+);
 
 export default Input;

@@ -15,7 +15,8 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       time: options.time ?? 6000,
       position: options.position ?? "bottom-center",
       offset: options.offset ?? 8,
-      status: options.status ?? "default",
+      status: options.status ?? "info",
+      hasIcon: options.hasIcon ?? true,
     };
     setToasts((prev) => [...prev, toast]);
   }, []);

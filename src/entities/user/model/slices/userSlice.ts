@@ -4,6 +4,8 @@ import type { User, UserShema } from "../types/UserSchema";
 
 const initialState: UserShema = {
   userData: undefined,
+  isLoading: false,
+  error: undefined,
 };
 
 export const userSlice = createSlice({

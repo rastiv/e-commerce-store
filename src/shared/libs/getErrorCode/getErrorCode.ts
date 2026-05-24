@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export type ZodIssue = {
+export type Issue = {
   path: (string | number)[];
   message: string;
   code: string;
@@ -10,19 +10,18 @@ export type ApiErrorResponse = {
   status: "error";
   code: string;
   message: string;
-  issues?: ZodIssue[];
+  issues?: Issue[];
 };
 
-export const getErrorKey = (error: unknown): string => {
+export const getErrorCode = (error: unknown): string => {
   if (axios.isAxiosError<ApiErrorResponse>(error)) {
     const data = error.response?.data;
 
     if (data?.issues && data.issues.length > 0) {
-      const firstIssue = data.issues[0];
-      return `VALIDATION.${firstIssue.path[0]}.${firstIssue.code}`;
+      return "INPUT_VALIDATION";
     }
 
-    return data?.code || `SERVER_ERROR_${error.response?.status}`;
+    return data?.code || `SERVER_${error.response?.status}`;
   }
 
   return "UNKNOWN_ERROR";

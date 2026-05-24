@@ -65,34 +65,22 @@
 
 .success {
   border-left-color: var(--green-500);
-
-  .icon svg {
-    fill: var(--green-500);
-  }
+  color: var(--green-500);
 }
 
 .error {
   border-left-color: var(--red-500);
-
-  .icon svg {
-    fill: var(--red-500);
-  }
+  color: var(--red-500);
 }
 
 .warning {
-  border-left-color: var(--yellow-500);
-
-  .icon svg {
-    fill: var(--yellow-500);
-  }
+  border-left-color: var(--orange-500);
+  color: var(--orange-500);
 }
 
-.default {
-  border-left-color: var(--primary-color);
-
-  .icon svg {
-    fill: var(--primary-color);
-  }
+.info {
+  border-left-color: var(--blue-500);
+  color: var(--blue-500);
 }
 
 /* ── Keyframes ─────────────────────────────────────────── */

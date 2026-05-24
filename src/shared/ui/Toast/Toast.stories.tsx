@@ -19,7 +19,8 @@ const meta = {
     time: 0,
     position: "bottom-center",
     offset: 8,
-    status: "default",
+    status: "info",
+    hasIcon: true,
     onClose: () => {},
   },
 } satisfies Meta<typeof Toast>;
@@ -28,7 +29,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { status: "default" },
+  args: { status: "info" },
 };
 
 export const Success: Story = {
@@ -49,6 +50,14 @@ export const Warning: Story = {
   args: {
     status: "warning",
     message: "Please review your information before continuing.",
+  },
+};
+
+export const WithoutIcon: Story = {
+  args: {
+    status: "info",
+    hasIcon: false,
+    message: "This toast has no status icon.",
   },
 };
 
@@ -103,23 +112,35 @@ const InteractiveDemo = () => {
         onClick={() =>
           addToast({
             message: "System maintenance scheduled for tonight.",
-            status: "default",
+            status: "info",
           })
         }
       >
-        Default
+        Info
       </Button>
       <Button
         theme="ghost"
         onClick={() =>
           addToast({
             message: "I stay open until you close me.",
-            status: "default",
+            status: "info",
             time: 0,
           })
         }
       >
         Persistent (time: 0)
+      </Button>
+      <Button
+        theme="tertiary"
+        onClick={() =>
+          addToast({
+            message: "No icon on this one.",
+            status: "info",
+            hasIcon: false,
+          })
+        }
+      >
+        Without Icon
       </Button>
       <Button
         theme="primary"
@@ -142,7 +163,7 @@ const InteractiveDemo = () => {
           addToast({
             message: "Bottom right corner!",
             position: "bottom-right",
-            status: "default",
+            status: "info",
           });
         }}
       >

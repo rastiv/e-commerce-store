@@ -1,13 +1,18 @@
-import type { AuthProviderType } from "@/shared/config";
-
 export type User = {
   id: string;
-  email?: string;
-  phone?: string;
-  isVerified?: boolean;
-  provider: AuthProviderType;
+  email: string;
+  name: string;
+  age: number;
+  gender: string;
+  role: string;
+  emailVerified: boolean;
+  twofactorEnabled: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UserShema = {
   userData?: User;
+  isLoading: boolean;
+  error?: string;
 };

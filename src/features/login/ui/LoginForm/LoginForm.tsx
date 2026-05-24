@@ -1,72 +1,71 @@
-import type { SubmitEvent } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import ArrowRight from "@/shared/assets/icons/ArrowRight.svg?react";
 import { routePaths } from "@/shared/config";
-import { useAppDispatch, useAppSelector } from "@/shared/libs";
+import { useAppDispatch, useCodeTranslation } from "@/shared/libs";
 import { AppIcon, Button, Input, useToast } from "@/shared/ui";
 
-import {
-  selectLoginEmail,
-  selectLoginError,
-  selectLoginIsLoading,
-  selectLoginPassword,
-  selectLoginPhone,
-} from "../../model/selectors";
+import { loginSchema, type LoginSchema } from "../../model/schemas/login";
 import { login } from "../../model/services/login";
-import { loginActions } from "../../model/slice/loginSlice";
 
 import styles from "./LoginForm.module.scss";
 
 export const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { addToast } = useToast();
+  const { t } = useTranslation(["validation"]);
+  const { tc } = useCodeTranslation();
 
-  const email = useAppSelector(selectLoginEmail);
-  const phone = useAppSelector(selectLoginPhone);
-  const password = useAppSelector(selectLoginPassword);
-  const isLoading = useAppSelector(selectLoginIsLoading);
-  const error = useAppSelector(selectLoginError);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+  });
 
-  const handleChangeEmail = (value: string) => {
-    dispatch(loginActions.setEmail(value));
-  };
-
-  const handleChangePassword = (value: string) => {
-    dispatch(loginActions.setPassword(value));
-  };
-
-  const handleSumbit = async (e: SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const result = await dispatch(login({ email, phone, password }));
-    if (login.fulfilled.match(result)) {
-      navigate(routePaths.home);
-    } else {
+  const onSubmit = async (data: LoginSchema) => {
+    setIsLoading(true);
+    try {
+      const result = await dispatch(login(data)).unwrap();
       addToast({
-        message: error || "Login failed",
+        message: tc(result.code),
+        status: "success",
+      });
+      navigate(routePaths.home);
+    } catch (errorKey) {
+      addToast({
+        message: tc(errorKey),
         status: "error",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSumbit}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Input
         label="Email"
-        value={email}
         type="email"
         placeholder="Enter your email"
         disabled={isLoading}
-        onChange={handleChangeEmail}
+        {...register("email")}
+        error={errors.email?.message && t(errors.email.message)}
       />
       <Input
         label="Password"
-        value={password}
         type="password"
         placeholder="Enter your password"
         disabled={isLoading}
-        onChange={handleChangePassword}
+        {...register("password")}
+        error={errors.password?.message && t(errors.password.message)}
       />
       <Button
         isLoading={isLoading}

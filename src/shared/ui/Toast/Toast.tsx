@@ -1,10 +1,6 @@
-import { X } from "lucide-react";
+import { Check, CircleAlert, CircleX, Info, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import DangerIcon from "@/shared/assets/icons/Danger.svg?react";
-import ErrorIcon from "@/shared/assets/icons/Error.svg?react";
-import InfoIcon from "@/shared/assets/icons/Info.svg?react";
-import SuccessIcon from "@/shared/assets/icons/Success.svg?react";
 import { cn } from "@/shared/libs";
 
 import styles from "./Toast.module.scss";
@@ -12,18 +8,11 @@ import type { ToastItem } from "./types";
 
 export const EXIT_DURATION = 200;
 
-const statusIconMap = {
-  success: <SuccessIcon />,
-  error: <ErrorIcon />,
-  warning: <DangerIcon />,
-  default: <InfoIcon />,
-};
-
 type ToastProps = ToastItem & {
   onClose: () => void;
 };
 
-const Toast = ({ message, time, status, onClose }: ToastProps) => {
+const Toast = ({ message, time, status, hasIcon, onClose }: ToastProps) => {
   const [leaving, setLeaving] = useState(false);
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -88,6 +77,10 @@ const Toast = ({ message, time, status, onClose }: ToastProps) => {
       onMouseEnter={pauseTimer}
       onMouseLeave={startTimer}
     >
+      {hasIcon && status === "info" && <Info size={20} />}
+      {hasIcon && status === "error" && <CircleX size={20} />}
+      {hasIcon && status === "warning" && <CircleAlert size={20} />}
+      {hasIcon && status === "success" && <Check size={20} />}
       <p className={styles.message}>{message}</p>
       <button
         className={styles.closeBtn}

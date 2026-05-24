@@ -6,7 +6,7 @@ export type ToastPosition =
   | "bottom-center"
   | "bottom-right";
 
-export type ToastStatus = "success" | "error" | "warning" | "default";
+export type ToastStatus = "success" | "error" | "warning" | "info";
 
 export type ToastItem = {
   id: string;
@@ -15,6 +15,7 @@ export type ToastItem = {
   position: ToastPosition;
   offset: number;
   status: ToastStatus;
+  hasIcon: boolean;
 };
 
 export type AddToastOptions = {
@@ -23,4 +24,5 @@ export type AddToastOptions = {
   position?: ToastPosition;
   offset?: number;
   status?: ToastStatus;
+  hasIcon?: boolean;
 };
