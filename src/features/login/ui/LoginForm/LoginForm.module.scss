@@ -9,18 +9,13 @@
   gap: var(--space-10);
 }
 
-.label {
-  font: var(--font-s);
-  font-weight: 600;
-  margin-bottom: var(--space-8);
-}
-
 .button {
   margin-top: var(--space-12);
 }
 
 .label {
   display: block;
+  font-weight: 600;
   margin-bottom: var(--space-8);
 }
 
