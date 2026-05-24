@@ -29,13 +29,14 @@ const Header = () => {
           <span>{t("companyAddress")}</span>
         </Button>
       </div>
-      <div className={styles.section}>
-        <Input
-          placeholder={t("searchBy")}
-          icon={<AppIcon Icon={SearchIcon} size={18} theme="background" />}
-          rounded
-        />
-      </div>
+
+      <Input
+        placeholder={t("searchBy")}
+        icon={<AppIcon Icon={SearchIcon} size={18} theme="background" />}
+        className={styles.searchInput}
+        rounded
+      />
+
       <div className={styles.section}>
         <Button theme="secondary">{t("cart")}</Button>
         <Button theme="outline" onClick={handleLoginClick}>

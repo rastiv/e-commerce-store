@@ -21,8 +21,6 @@ type InputProps = {
   rounded?: boolean;
   disabled?: boolean;
   error?: string;
-  label?: string;
-  helperText?: string;
 } & HTMLInputType;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -36,8 +34,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled = false,
       type = "text",
       error,
-      label,
-      helperText,
       ...rest
     }: InputProps,
     ref,
@@ -62,49 +58,39 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <div>
-        {label && <label className={cn(styles.label)}>{label}</label>}
-        <div
-          className={cn(styles.inputContainer, className, {
+      <div
+        className={cn(styles.inputContainer, className, {
+          [styles.rounded]: rounded,
+          [styles.disabled]: disabled,
+          [styles.focus]: focus,
+          [styles.error]: !!error,
+        })}
+      >
+        {icon}
+        <input
+          {...rest}
+          ref={ref as React.Ref<HTMLInputElement>}
+          value={value}
+          disabled={disabled}
+          type={showPassword && type === "password" ? "text" : type}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          className={cn(styles.input, {
             [styles.rounded]: rounded,
             [styles.disabled]: disabled,
-            [styles.focus]: focus,
             [styles.error]: !!error,
           })}
-        >
-          {icon}
-          <input
-            {...rest}
-            ref={ref as React.Ref<HTMLInputElement>}
-            value={value}
-            disabled={disabled}
-            type={showPassword && type === "password" ? "text" : type}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            className={cn(styles.input, {
-              [styles.rounded]: rounded,
-              [styles.disabled]: disabled,
-              [styles.error]: !!error,
-            })}
-          />
+        />
 
-          {type === "password" && (
-            <Button theme="ghost" type="button" onClick={toggleShowPassword}>
-              {showPassword ? (
-                <EyeOff className={styles.icon} />
-              ) : (
-                <Eye className={styles.icon} />
-              )}
-            </Button>
-          )}
-        </div>
-        {helperText && !error && (
-          <div className={styles.helperText}>{helperText}</div>
-        )}
-        {error && <div className={styles.errorText}>{error}</div>}
-        {!helperText && !error && (
-          <div className={styles.errorText}>{"\u00A0"}</div>
+        {type === "password" && (
+          <Button theme="ghost" type="button" onClick={toggleShowPassword}>
+            {showPassword ? (
+              <EyeOff className={styles.icon} />
+            ) : (
+              <Eye className={styles.icon} />
+            )}
+          </Button>
         )}
       </div>
     );

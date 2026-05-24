@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import ArrowRight from "@/shared/assets/icons/ArrowRight.svg?react";
 import { routePaths } from "@/shared/config";
 import { useAppDispatch, useCodeTranslation } from "@/shared/libs";
-import { AppIcon, Button, Input, useToast } from "@/shared/ui";
+import { Button, FormField, Input, useToast } from "@/shared/ui";
 
 import { loginSchema, type LoginSchema } from "../../model/schemas/login";
 import { login } from "../../model/services/login";
@@ -51,22 +51,28 @@ export const LoginForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <Input
+      <FormField
         label="Email"
-        type="email"
-        placeholder="Enter your email"
-        disabled={isLoading}
-        {...register("email")}
         error={errors.email?.message && t(errors.email.message)}
-      />
-      <Input
+      >
+        <Input
+          type="email"
+          placeholder="Enter your email"
+          disabled={isLoading}
+          {...register("email")}
+        />
+      </FormField>
+      <FormField
         label="Password"
-        type="password"
-        placeholder="Enter your password"
-        disabled={isLoading}
-        {...register("password")}
         error={errors.password?.message && t(errors.password.message)}
-      />
+      >
+        <Input
+          type="password"
+          placeholder="Enter your password"
+          disabled={isLoading}
+          {...register("password")}
+        />
+      </FormField>
       <Button
         isLoading={isLoading}
         disabled={isLoading}
@@ -75,7 +81,7 @@ export const LoginForm = () => {
         size="md"
         fullWidth
       >
-        Login <AppIcon Icon={ArrowRight} />
+        Login <ArrowRight />
       </Button>
     </form>
   );

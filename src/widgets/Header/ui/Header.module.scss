@@ -4,6 +4,7 @@
   padding: 10px var(--container-padding);
   display: flex;
   width: 100%;
+  align-items: center;
 }
 
 .section {
@@ -20,4 +21,8 @@
 
 .logo {
   fill: var(--primary-color);
+}
+
+.searchInput {
+  padding: var(--space-8);
 }

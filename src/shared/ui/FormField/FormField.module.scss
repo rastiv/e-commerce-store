@@ -1,0 +1,20 @@
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+}
+
+.helper {
+  color: var(--gray-400);
+  font: var(--font-sm);
+  margin-top: var(--space-3);
+}
+
+.error {
+  color: var(--red-500);
+}

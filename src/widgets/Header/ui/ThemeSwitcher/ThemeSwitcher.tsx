@@ -1,4 +1,5 @@
-import CircleIcon from "@/shared/assets/icons/Circle.svg?react";
+import { Circle } from "lucide-react";
+
 import { useTheme } from "@/shared/config";
 import { AppIcon, Button } from "@/shared/ui";
 
@@ -7,7 +8,7 @@ const ThemeSwitcher = () => {
 
   return (
     <Button theme="ghost" onClick={toggleTheme}>
-      <AppIcon Icon={CircleIcon} filled />
+      <AppIcon Icon={Circle} filled />
     </Button>
   );
 };

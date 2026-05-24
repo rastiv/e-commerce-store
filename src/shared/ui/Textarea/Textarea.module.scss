@@ -1,0 +1,29 @@
+.textarea {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: var(--space-12) var(--space-16);
+  transition:
+    outline 0.2s linear,
+    border 0.2s linear;
+  outline: 3px solid transparent;
+
+  &::placeholder {
+    color: var(--gray-400);
+  }
+
+  &:focus {
+    border-color: var(--primary-color-60);
+    outline: 3px solid var(--primary-color-30);
+  }
+
+  &:disabled {
+    background: var(--gray-50);
+  }
+
+  &.error {
+    border-color: var(--red-500);
+    outline: 3px solid var(--red-500-30);
+  }
+}
