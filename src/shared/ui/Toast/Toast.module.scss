@@ -1,16 +1,38 @@
 .toast {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-12);
   min-width: 280px;
   max-width: 400px;
   padding: var(--space-12) var(--space-16);
+  padding-left: var(--space-56);
   border-radius: 8px;
-  border-left: 4px solid transparent;
   background-color: var(--white);
-  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+  box-shadow: 0 4px 16px rgba(131, 126, 126, 0.12);
   animation: toast-in 250ms ease-out forwards;
   pointer-events: all;
+
+  &:not(.hasIcon) {
+    border-left: 4px solid transparent;
+    padding-left: var(--space-16);
+
+    &.success {
+      border-left-color: var(--green-500);
+    }
+
+    &.error {
+      border-left-color: var(--red-500);
+    }
+
+    &.warning {
+      border-left-color: var(--orange-500);
+    }
+
+    &.info {
+      border-left-color: var(--blue-500);
+    }
+  }
 }
 
 .leaving {
@@ -18,24 +40,41 @@
 }
 
 .icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  color: var(--white);
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 
-  svg {
-    width: 100%;
-    height: 100%;
+  &.success {
+    background-color: var(--green-500);
+  }
+
+  &.error {
+    background-color: var(--red-500);
+  }
+
+  &.warning {
+    background-color: var(--orange-500);
+  }
+
+  &.info {
+    background-color: var(--blue-500);
   }
 }
 
 .message {
   flex: 1;
-  font: var(--font-sm);
+  font: var(--font-md);
   color: var(--gray-800);
   overflow-wrap: anywhere;
+  line-height: 1.2;
   margin: 0;
 }
 
@@ -50,8 +89,6 @@
   padding: 0;
 
   svg {
-    width: 14px;
-    height: 14px;
     fill: var(--gray-400);
     transition: fill 0.15s ease;
   }
@@ -59,28 +96,6 @@
   &:hover svg {
     fill: var(--gray-700);
   }
-}
-
-/* ── Status variants ───────────────────────────────────── */
-
-.success {
-  border-left-color: var(--green-500);
-  color: var(--green-500);
-}
-
-.error {
-  border-left-color: var(--red-500);
-  color: var(--red-500);
-}
-
-.warning {
-  border-left-color: var(--orange-500);
-  color: var(--orange-500);
-}
-
-.info {
-  border-left-color: var(--blue-500);
-  color: var(--blue-500);
 }
 
 /* ── Keyframes ─────────────────────────────────────────── */

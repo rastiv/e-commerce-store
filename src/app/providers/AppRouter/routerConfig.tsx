@@ -1,26 +1,26 @@
 import type { RouteProps } from "react-router";
 
-import HomePage from "@/pages/home/ui/HomePage";
-import LoginPage from "@/pages/login/ui/LoginPage";
-import { NotFoundPage } from "@/pages/NotFound";
+import { HomePageAsync } from "@/pages/home";
+import { LoginPageAsync } from "@/pages/login";
+import { NotFoundPageAsync } from "@/pages/NotFound";
 
 import { AppRouter, routePaths } from "@/shared/config";
 
 export const routeConfig: RouteProps[] = [
   {
     path: routePaths[AppRouter.HOME],
-    element: <HomePage />,
+    element: <HomePageAsync />,
   },
   {
     path: routePaths[AppRouter.LOGIN],
-    element: <LoginPage />,
+    element: <LoginPageAsync />,
   },
   {
     path: routePaths[AppRouter.REGISTER],
-    element: <LoginPage />,
+    element: <LoginPageAsync />,
   },
   {
     path: routePaths[AppRouter.NOT_FOUND],
-    element: <NotFoundPage />,
+    element: <NotFoundPageAsync />,
   },
 ];

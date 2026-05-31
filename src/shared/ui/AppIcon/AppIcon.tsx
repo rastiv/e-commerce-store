@@ -26,9 +26,7 @@ const AppIcon = ({
       width={size}
       height={size}
       className={cn(styles.icon, className, {
-        [styles.filled]: theme === "clean",
-        [styles.background]: theme === "background",
-        [styles.filled]: filled,
+        [styles.filled]: theme === "clean" && filled,
       })}
     />
   );

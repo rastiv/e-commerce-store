@@ -1,23 +1,62 @@
+import { LogOut, MapPin, Search, User } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
+import { logout } from "@/features/login/model/services/logout";
+
+import { selectUser } from "@/entities/user";
+
 import LogoIcon from "@/shared/assets/icons/Logo.svg?react";
-import MapPin from "@/shared/assets/icons/MapPin.svg?react";
-import SearchIcon from "@/shared/assets/icons/Search.svg?react";
-import UsersIcon from "@/shared/assets/icons/Users.svg?react";
 import { routePaths } from "@/shared/config";
-import { Button, Input, AppIcon } from "@/shared/ui";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCodeTranslation,
+} from "@/shared/libs";
+import { Button, Input, AppIcon, useToast } from "@/shared/ui";
 
 import styles from "./Header.module.scss";
 import LanguageSwitcher from "./LanguageSwitcher/LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher/ThemeSwitcher";
 
 const Header = () => {
-  const { t } = useTranslation(["common", "auth"]);
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { addToast } = useToast();
+  const { t } = useTranslation(["common", "auth"]);
+  const { tc } = useCodeTranslation();
+
+  const user = useAppSelector(selectUser);
 
   const handleLoginClick = () => {
     navigate(routePaths.login);
+  };
+
+  const handleLogoutClick = async () => {
+    setIsLoading(true);
+    try {
+      const result = await dispatch(
+        logout({ rejectValue: "LOGOUT_FAILED" }),
+      ).unwrap();
+      addToast({
+        message: tc(result.code),
+        status: "success",
+      });
+      navigate(routePaths.home);
+    } catch (errorKey) {
+      if (errorKey === "ALREADY_LOGGED_IN") {
+        navigate(routePaths.home);
+        return;
+      }
+      addToast({
+        message: tc(errorKey),
+        status: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -32,17 +71,28 @@ const Header = () => {
 
       <Input
         placeholder={t("searchBy")}
-        icon={<AppIcon Icon={SearchIcon} size={18} theme="background" />}
+        icon={<AppIcon Icon={Search} size={18} theme="background" />}
         className={styles.searchInput}
         rounded
       />
 
       <div className={styles.section}>
         <Button theme="secondary">{t("cart")}</Button>
-        <Button theme="outline" onClick={handleLoginClick}>
-          <AppIcon Icon={UsersIcon} />
-          <span>{t("auth:login")}</span>
-        </Button>
+        {user ? (
+          <Button
+            theme="outline"
+            onClick={handleLogoutClick}
+            disabled={isLoading}
+          >
+            <AppIcon Icon={LogOut} />
+            <span>{t("auth:logout")}</span>
+          </Button>
+        ) : (
+          <Button theme="outline" onClick={handleLoginClick}>
+            <AppIcon Icon={User} />
+            <span>{t("auth:login")}</span>
+          </Button>
+        )}
 
         <ThemeSwitcher />
 

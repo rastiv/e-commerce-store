@@ -73,21 +73,26 @@ const Toast = ({ message, time, status, hasIcon, onClose }: ToastProps) => {
     <div
       className={cn(styles.toast, styles[status], {
         [styles.leaving]: leaving,
+        [styles.hasIcon]: hasIcon,
       })}
       onMouseEnter={pauseTimer}
       onMouseLeave={startTimer}
     >
-      {hasIcon && status === "info" && <Info size={20} />}
-      {hasIcon && status === "error" && <CircleX size={20} />}
-      {hasIcon && status === "warning" && <CircleAlert size={20} />}
-      {hasIcon && status === "success" && <Check size={20} />}
+      {hasIcon && (
+        <div className={cn(styles.icon, styles[status])}>
+          {status === "error" && <CircleX size={22} />}
+          {status === "info" && <Info size={22} />}
+          {status === "warning" && <CircleAlert size={22} />}
+          {status === "success" && <Check size={18} />}
+        </div>
+      )}
       <p className={styles.message}>{message}</p>
       <button
         className={styles.closeBtn}
         onClick={handleClose}
         aria-label="Close toast"
       >
-        <X />
+        <X size={18} />
       </button>
     </div>
   );

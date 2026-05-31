@@ -19,6 +19,9 @@ import {
 } from "./theme/ThemeContext";
 import { useTheme } from "./theme/useTheme";
 
+const API_URL = "http://localhost:3005";
+const IS_DEV = import.meta.env.MODE === "development";
+
 export {
   routePaths,
   AppRouter,
@@ -30,6 +33,8 @@ export {
   languageIconList,
   AuthProvider,
   AuthMethod,
+  API_URL,
+  IS_DEV,
   type ThemeType,
   type SupportedLngsType,
   type LanguageIconListType,

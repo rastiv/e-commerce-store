@@ -2,7 +2,7 @@ import { LoginForm } from "@/features/login";
 
 import styles from "./LoginPage.module.scss";
 
-const LoginPage = () => {
+export const LoginPage = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>

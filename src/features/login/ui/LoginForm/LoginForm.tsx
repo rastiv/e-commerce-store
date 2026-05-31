@@ -40,6 +40,10 @@ export const LoginForm = () => {
       });
       navigate(routePaths.home);
     } catch (errorKey) {
+      if (errorKey === "ALREADY_LOGGED_IN") {
+        navigate(routePaths.home);
+        return;
+      }
       addToast({
         message: tc(errorKey),
         status: "error",
