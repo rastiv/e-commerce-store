@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { ChangeEvent } from "react";
 
-import { cn } from "@/shared/libs";
+import { cn } from "@/shared/utils";
 
 import styles from "./Textarea.module.scss";
 
