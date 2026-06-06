@@ -1,30 +1,37 @@
-import { Suspense, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { initUserData, selectIsUserLoading } from "@/entities/user";
+import { $api } from "@/shared/api";
+import { setUserData, type AuthData } from "@/features/auth/store/authSlice";
 
-import { useAppDispatch, useAppSelector } from "@/shared/libs";
-
-import { AppRouter, ErrorBoundary } from "./providers";
+import { useAppDispatch } from "./store";
+import { AppRouter } from "./AppRouter";
 
 function App() {
-  const appDispatch = useAppDispatch();
-  const isLoading = useAppSelector(selectIsUserLoading);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    appDispatch(initUserData());
-  }, [appDispatch]);
+    const fetchUserSession = async () => {
+      try {
+        const response = await $api.get<AuthData>("/api/auth/get-session");
+
+        console.log("response.data.data", response.data);
+        if (response.data) {
+          dispatch(setUserData(response.data.user));
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserSession();
+  }, [dispatch]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  return (
-    <ErrorBoundary>
-      <Suspense fallback={<></>}>
-        <AppRouter />
-      </Suspense>
-    </ErrorBoundary>
-  );
+  return <AppRouter />;
 }
 
 export default App;

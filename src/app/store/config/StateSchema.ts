@@ -1,5 +1,6 @@
-import type { UserShema } from "@/entities/user";
+import type { AuthState } from "@/features/auth/store/authSlice";
 
 export interface StateSchema {
-  user: UserShema;
+  auth: AuthState;
+  // here we will add: products: ProductsState;
 }

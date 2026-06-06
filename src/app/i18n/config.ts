@@ -7,14 +7,16 @@ import * as en from "./locales/en";
 
 export const supportedLngs = ["en", "bg"] as const;
 
+const resources = {
+  en: { ...en },
+  bg: { ...bg },
+};
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources: {
-      en,
-      bg,
-    },
+    resources,
     ns: Object.keys(en),
     fallbackLng: "en",
     defaultNS: "common",

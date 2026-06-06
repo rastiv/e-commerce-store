@@ -1,7 +1,6 @@
 import {
   AuthProvider,
   AuthMethod,
-  LOCAL_STORAGE_USER_KEY,
   type AuthProviderType,
   type AuthMethodType,
 } from "./auth/auth";
@@ -28,7 +27,6 @@ export {
   Theme,
   ThemeContext,
   LOCAL_STORAGE_THEME_KEY,
-  LOCAL_STORAGE_USER_KEY,
   useTheme,
   languageIconList,
   AuthProvider,

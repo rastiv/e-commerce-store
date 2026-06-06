@@ -1,6 +1,5 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import storybook from "eslint-plugin-storybook";
-import featureSliced from "@conarti/eslint-plugin-feature-sliced";
 import importPlugin from "eslint-plugin-import";
 import js from "@eslint/js";
 import globals from "globals";
@@ -13,7 +12,6 @@ export default defineConfig([
   globalIgnores(["dist"]),
   {
     plugins: {
-      "@conarti/feature-sliced": featureSliced,
       import: importPlugin,
     },
     files: ["**/*.{ts,tsx}"],
@@ -28,63 +26,15 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      ...featureSliced.configs.recommended.rules,
-      "import/order": [
-        "error",
-        {
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-          ],
-          pathGroups: [
-            {
-              pattern: "@/app/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "@/pages/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "@/widgets/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "@/features/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "@/entities/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "@/shared/**",
-              group: "internal",
-              position: "before",
-            },
-          ],
-          pathGroupsExcludedImportTypes: ["builtin"],
-          "newlines-between": "always",
-          alphabetize: {
-            order: "asc",
-            caseInsensitive: true,
-          },
-        },
-      ],
+      // НАПЪЛНО изключваме досадното следене за ред, позиции и празни редове
+      "import/order": "off",
+      "import/first": "off",
+      "import/newline-after-import": "off",
 
-      "import/first": "error",
-      "import/newline-after-import": "error",
+      // Оставяме само полезната защита срещу двойно импортиране на един и същ файл
       "import/no-duplicates": "error",
 
+      // Контрол за неизползвани променливи (игнорира тези, започващи с долна черта)
       "@typescript-eslint/no-unused-vars": [
         "error",
         {

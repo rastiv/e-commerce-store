@@ -3,21 +3,26 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import "@/app/i18n/config";
 
-import App from "./app/App.tsx";
-import { StoreProvider, ThemeProvider, ToastProvider } from "./app/providers";
+import { ErrorBoundary } from "@/app/ErrorBaundary";
+import { StoreProvider } from "@/app/StoreProvider";
+import { ThemeProvider } from "@/app/ThemeProvider";
+import { ToastProvider } from "@/app/ToastProvider";
 
-import "./app/styles/index.scss";
+import App from "@/app/App.tsx";
+import "@/app/styles/index.scss";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <StoreProvider>
-      <BrowserRouter>
-        <ThemeProvider>
-          <ToastProvider>
-            <App />
-          </ToastProvider>
-        </ThemeProvider>
-      </BrowserRouter>
-    </StoreProvider>
+    <ErrorBoundary>
+      <StoreProvider>
+        <BrowserRouter>
+          <ThemeProvider>
+            <ToastProvider>
+              <App />
+            </ToastProvider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </StoreProvider>
+    </ErrorBoundary>
   </StrictMode>,
 );

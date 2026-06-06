@@ -1,7 +1,6 @@
 import type { ParseKeys } from "i18next";
 import { useTranslation } from "react-i18next";
-
-import { getErrorCode } from "../libs";
+import { getErrorCode } from "../utils";
 
 export const useCodeTranslation = () => {
   const { t } = useTranslation("codes");
