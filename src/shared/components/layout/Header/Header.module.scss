@@ -1,7 +1,7 @@
 .header {
-  background-origin: var(--white);
-  border-bottom: 1px solid var(--gray-50);
-  padding: 10px var(--container-padding);
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-100);
+  padding: var(--space-16) 0;
   display: flex;
   width: 100%;
   align-items: center;
