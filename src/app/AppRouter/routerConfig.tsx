@@ -4,7 +4,12 @@ import { AppRouter, routePaths } from "@/shared/config";
 import { NotFoundPageAsync } from "@/shared/components/PageNotFound";
 import { LoginPageAsync } from "@/features/auth";
 
-export const routeConfig: RouteProps[] = [
+export type AppRouteProps = RouteProps & {
+  authOnly?: boolean;
+  guestOnly?: boolean;
+};
+
+export const routeConfig: AppRouteProps[] = [
   {
     path: routePaths[AppRouter.HOME],
     element: <HomePageAsync />,
@@ -12,10 +17,12 @@ export const routeConfig: RouteProps[] = [
   {
     path: routePaths[AppRouter.LOGIN],
     element: <LoginPageAsync />,
+    guestOnly: true,
   },
   {
     path: routePaths[AppRouter.REGISTER],
     element: <LoginPageAsync />,
+    guestOnly: true,
   },
   {
     path: routePaths[AppRouter.NOT_FOUND],

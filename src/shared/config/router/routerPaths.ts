@@ -2,6 +2,7 @@ export const AppRouter = {
   HOME: "home",
   LOGIN: "login",
   REGISTER: "register",
+  FORGOTTEN_PASSWORD: "forgotten-password",
   NOT_FOUND: "not_found",
 } as const;
 
@@ -11,7 +12,6 @@ export const routePaths: Record<AppRoutes, string> = {
   [AppRouter.HOME]: "/",
   [AppRouter.LOGIN]: "/login",
   [AppRouter.REGISTER]: "/register",
-
-  // This route should be last in the list, as it is a catch-all for undefined routes
+  [AppRouter.FORGOTTEN_PASSWORD]: "/forgotten-password",
   [AppRouter.NOT_FOUND]: "*",
 };
